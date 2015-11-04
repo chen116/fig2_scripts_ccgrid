@@ -8,7 +8,8 @@ RTLAUNCH="/root/liblitmus/rt_launch"
 SPIN_PIDS=""
 #RAW_DATA="/root/task_sets_raw/"
 RAW_DATA="/root/task_sets_raw/"
-NEW_DATA="/root/experiment-scripts/task_sets_icloud_granular"
+# NEW_DATA="/root/experiment-scripts/task_sets_icloud_granular"
+NEW_DATA="/root/experiment-scripts/task_sets_icloud_bimo_moderate"
 #NEW_DATA="/root/experiment-scripts/task_sets_VaryUtil/"
 #NEW_DATA="/root/experiment-scripts/task_sets_VaryUtil/"
 #PDist="uni-long"
@@ -29,14 +30,14 @@ SchedNames="GSN-EDF"
 for sched in $SchedNames
 do
   #for util in 8.5
-  #for util in 2.0 3.0 4.0 6.0 6.2
+  for util in 3.0 4.0 5.0 6.0 7.0 8.0 8.2
 #  for util in 2.2 2.6 3.2 3.6 4.2 4.6 5.2 5.6 6.2 6.6 7 7.2
 #  for util in 3.2 3.6 4.2 4.6 5.2 5.6 6.2 6.6 7.2 7.6 8
 #  for util in 3.2 3.4 3.6 3.8 4.2 4.4 4.6 4.8 5.2 5.4 5.6 5.8 6.2 6.4 6.6 6.8 7.2 7.4 7.6 7.8 8 8.2 8.4
 #  for util in 9.0 10.0 11.0 12.0
 #   for util in 8.2 8.4 8.6 8.8
 #  for util in 0.2 0.4 0.6 0.8 1.2 1.4 1.6 1.8 2.2 2.4 2.6 2.8 3.2 3.4 3.6 3.8 4.2 4.4 4.6 4.8 5.2 5.4 5.6 5.8 6.2 6.4 6.6 6.8 7.2 7.4 7.6 7.8 8
- for util in 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 4.2 4.4 4.6 4.8 5 5.2 5.4 5.6 5.8 6 6.2 6.4 6.6 6.8 7 7.2 7.4 7.6 7.8 8 8.2 8.4
+# for util in 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 4.2 4.4 4.6 4.8 5 5.2 5.4 5.6 5.8 6 6.2 6.4 6.6 6.8 7 7.2 7.4 7.6 7.8 8 8.2 8.4
   do
     #for rep in 0
     for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
