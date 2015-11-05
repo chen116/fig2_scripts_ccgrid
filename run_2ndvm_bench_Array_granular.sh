@@ -16,7 +16,7 @@ NEW_DATA="/root/experiment-scripts/task_sets_icloud_granular"
 #PDist="uni-moderate"
 #PDist="uni-short"
 PROG="myapp"
-Dist="uni-heavy"
+Dist="uni-light"
 Duration="10"
 PDist="uni-moderate"
 declare -a NEW_SPIN_PIDS
