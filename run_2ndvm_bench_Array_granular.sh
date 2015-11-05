@@ -16,9 +16,9 @@ NEW_DATA="/root/experiment-scripts/task_sets_icloud_granular"
 #PDist="uni-moderate"
 #PDist="uni-short"
 PROG="myapp"
-Dist="uni-light"
+Dist="uni-heavy"
 Duration="10"
-PDist="uni-longRTXen"
+PDist="uni-moderate"
 declare -a NEW_SPIN_PIDS
 
 #Util=`echo $Dist | cut -d'_' -f 2`
@@ -37,21 +37,22 @@ do
 #  for util in 9.0 10.0 11.0 12.0
 #   for util in 8.2 8.4 8.6 8.8
 #  for util in 0.2 0.4 0.6 0.8 1.2 1.4 1.6 1.8 2.2 2.4 2.6 2.8 3.2 3.4 3.6 3.8 4.2 4.4 4.6 4.8 5.2 5.4 5.6 5.8 6.2 6.4 6.6 6.8 7.2 7.4 7.6 7.8 8
+# for util in 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 4.2 4.4 4.6 4.8 5 5.2 5.4 5.6 5.8 6 6.2 6.4 6.6 6.8 7 7.2 7.4 7.6 7.8 8 8.2 8.4
  for util in 4
   do
-    for rep in 0
-    #for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+    #for rep in 0
+    for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
     do
 
-# echo "Starting st_trace"
-# ${ST_TRACE} -s mk &
-# ST_TRACE_PID="$!"
-# echo "st_trace pid: ${ST_TRACE_PID}"
-# sleep 1
+echo "Starting st_trace"
+${ST_TRACE} -s mk &
+ST_TRACE_PID="$!"
+echo "st_trace pid: ${ST_TRACE_PID}"
+sleep 1
 
-# echo "Switching to $sched plugin"
-# echo "$sched" > /proc/litmus/active_plugin
-# sleep 1
+echo "Switching to $sched plugin"
+echo "$sched" > /proc/litmus/active_plugin
+sleep 1
 
 #read wcet and period from the dist file
 filename="$NEW_DATA""/""$Dist""_""$PDist""_""$util""_""$rep"
@@ -76,11 +77,7 @@ do
   c=`expr $c + 1`
 done
 
-# echo "Setting up rtspin processes"
-y=0
-x=1
-while [ $y -lt $x ]; do
-
+echo "Setting up rtspin processes"
 for nt in `seq 1 $num_tasks`;
 do
   #$PROG ${wcet[`expr $nt - 1`]} ${period[`expr $nt - 1`]} $Duration -w &
@@ -91,41 +88,41 @@ do
   SPIN_PIDS="$SPIN_PIDS $!"
   NEW_SPIN_PIDS[`expr $nt - 1`]="$!"
 done
-# sleep 1
+sleep 1
 
 #echo "catting log"
 #cat /dev/litmus/log > log.txt &
 #LOG_PID="$!"
 #sleep 1
-# echo "Doing release..."
+echo "Doing release..."
 $RELEASETS
 
-# echo "Waiting for rtspin processes..."
-wait ${SPIN_PIDS}
+echo "Waiting for rtspin processes..."
+# wait ${SPIN_PIDS}
 
 for i in "${NEW_SPIN_PIDS[@]}"
 do
   wait $i
 done
 unset NEW_SPIN_PIDS
-done
-# echo "Done wait, sleeping"
-# sleep 1
-# echo "Killing log"
-# kill ${LOG_PID}
-# sleep 1
-# echo "Sending SIGUSR1 to st_trace"
-# kill -USR1 ${ST_TRACE_PID}
-# echo "Waiting for st_trace..."
-# wait ${ST_TRACE_PID}
-# sleep 1
 
-# mkdir -p run-data-fig2/"$PROG"/
-# mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
-# mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
-# #mv log.txt run-data/"$sched"_$rep/
-# sleep 1
-# echo "Done! Collect your logs."
+echo "Done wait, sleeping"
+sleep 1
+echo "Killing log"
+kill ${LOG_PID}
+sleep 1
+echo "Sending SIGUSR1 to st_trace"
+kill -USR1 ${ST_TRACE_PID}
+echo "Waiting for st_trace..."
+wait ${ST_TRACE_PID}
+sleep 1
+
+mkdir -p run-data-fig2/"$PROG"/
+mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+#mv log.txt run-data/"$sched"_$rep/
+sleep 1
+echo "Done! Collect your logs."
 
     done
   done
