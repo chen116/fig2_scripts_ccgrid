@@ -93,7 +93,7 @@ long count;
  */
 int main(int argc, char** argv)
 {
-	int do_exit, ret;
+	int do_exit;//, ret;
 	struct rt_task param;
 
     // wcet = atoi(argv[1]);    // in ms
