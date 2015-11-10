@@ -3,8 +3,8 @@ date
 WORK_DIR="/root/experiment-scripts/run-data-fig2/"
 PROG=$1
 
-#declare -a Dist=("bimo-medium")
-declare -a Dist=("uni-heavy" "uni-medium" "uni-light")
+declare -a Dist=("bimo-medium")
+#declare -a Dist=("uni-heavy" "uni-medium" "uni-light")
 #declare -a Dist=("uni-light")
 #declare -a PDist=("uni-moderate")
 #declare -a Dist=("uni-light" "uni-medium" "uni-heavy")
