@@ -4,6 +4,7 @@ RTSPIN="/root/liblitmus/rtspin"
 BASE_TASK="/root/liblitmus/mytools/myapp"
 RELEASETS="/root/liblitmus/release_ts"
 ST_TRACE="/root/ft_tools/st_trace"
+ft_cat="/root/ft_tools/ftcat"
 RTLAUNCH="/root/liblitmus/rt_launch"
 SPIN_PIDS=""
 #RAW_DATA="/root/task_sets_raw/"
@@ -14,10 +15,10 @@ NEW_DATA="/root/experiment-scripts/task_sets_icloud_granular"
 #PDist="uni-long"
 #PDist="uni-moderate"
 #PDist="uni-short"
-PROG=$1
-Dist=$2
-Duration=$3
-PDist=$4
+PROG="myapp"
+Dist="uni-heavy"
+Duration="2"
+PDist="uni-moderate"
 declare -a NEW_SPIN_PIDS
 
 #Util=`echo $Dist | cut -d'_' -f 2`
@@ -28,7 +29,7 @@ SchedNames="GSN-EDF"
 
 for sched in $SchedNames
 do
-  for util in 1 2 3 4 5 6 7 8
+  #for util in 1 2 3 4 5 6 7 8
   #for util in 8.5
   #for util in 3.0 4.0 5.0 6.0 7.0 8.0 8.2
 #  for util in 2.2 2.6 3.2 3.6 4.2 4.6 5.2 5.6 6.2 6.6 7 7.2
@@ -38,16 +39,17 @@ do
 #   for util in 8.2 8.4 8.6 8.8
 #  for util in 0.2 0.4 0.6 0.8 1.2 1.4 1.6 1.8 2.2 2.4 2.6 2.8 3.2 3.4 3.6 3.8 4.2 4.4 4.6 4.8 5.2 5.4 5.6 5.8 6.2 6.4 6.6 6.8 7.2 7.4 7.6 7.8 8
  # for util in 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 4.2 4.4 4.6 4.8 5 5.2 5.4 5.6 5.8 6 6.2 6.4 6.6 6.8 7 7.2 7.4 7.6 7.8 8 8.2 8.4
- #for util in 1 2 3 4 4.2
+  for util in 7
   do
-    #for rep in 0
-    for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+    for rep in 0
+    #for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
     do
 
 echo "Starting st_trace"
-${ST_TRACE} -s mk &
+#${ST_TRACE} -s mk &
+ftcat /dev/litmus/ft_cpu_trace0 CXS_START CXS_END SCHED_START SCHED_END SCHED2_START SCHED2_END > my_trace_of_scheduling_events_on_cpu0 &
 ST_TRACE_PID="$!"
-echo "st_trace pid: ${ST_TRACE_PID}"
+echo "ftcat pid: ${ST_TRACE_PID}"
 sleep 1
 
 echo "Switching to $sched plugin"
@@ -117,9 +119,10 @@ echo "Waiting for st_trace..."
 wait ${ST_TRACE_PID}
 sleep 1
 
-mkdir -p run-data-fig2/"$PROG"/
-mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
-mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+#mkdir -p run-data-fig2/"$PROG"/
+#mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+#mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+#mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
 #mv log.txt run-data/"$sched"_$rep/
 sleep 1
 echo "Done! Collect your logs."
@@ -128,4 +131,5 @@ echo "Done! Collect your logs."
   done
 done
 echo "DONE!"
+ft2csv CXS_START my_trace_of_scheduling_events_on_cpu0
 
