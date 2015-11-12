@@ -45,11 +45,34 @@ do
     #for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
     do
 
-echo "Starting st_trace"
+echo "Starting ohm"
 #${ST_TRACE} -s mk &
-ftcat /dev/litmus/ft_cpu_trace0 CXS_START CXS_END SCHED_START SCHED_END SCHED2_START SCHED2_END > my_trace_of_scheduling_events_on_cpu0 &
-ST_TRACE_PID="$!"
-echo "ftcat pid: ${ST_TRACE_PID}"
+ftcat /dev/litmus/ft_cpu_trace0 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu0 &
+ST_TRACE0_PID="$!"
+echo "ftcat_cpu0 pid: ${ST_TRACE0_PID}"
+ftcat /dev/litmus/ft_cpu_trace1 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu1 &
+ST_TRACE1_PID="$!"
+echo "ftcat_cpu1 pid: ${ST_TRACE1_PID}"
+ftcat /dev/litmus/ft_cpu_trace2 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu2 &
+ST_TRACE2_PID="$!"
+echo "ftcat_cpu2 pid: ${ST_TRACE2_PID}"
+ftcat /dev/litmus/ft_cpu_trace3 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu3 &
+ST_TRACE3_PID="$!"
+echo "ftcat_cpu3 pid: ${ST_TRACE3_PID}"
+ftcat /dev/litmus/ft_cpu_trace4 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu4 &
+ST_TRACE4_PID="$!"
+echo "ftcat_cpu4 pid: ${ST_TRACE4_PID}"
+ftcat /dev/litmus/ft_cpu_trace5 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu5 &
+ST_TRACE5_PID="$!"
+echo "ftcat_cpu5 pid: ${ST_TRACE5_PID}"
+ftcat /dev/litmus/ft_cpu_trace6 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu6 &
+ST_TRACE6_PID="$!"
+echo "ftcat_cpu6 pid: ${ST_TRACE6_PID}"
+ftcat /dev/litmus/ft_cpu_trace7 CXS_START CXS_END SCHED_START SCHED_END > ohm_cpu7 &
+ST_TRACE7_PID="$!"
+echo "ftcat_cpu7 pid: ${ST_TRACE7_PID}"
+
+
 sleep 1
 
 echo "Switching to $sched plugin"
@@ -113,10 +136,24 @@ sleep 1
 echo "Killing log"
 kill ${LOG_PID}
 sleep 1
-echo "Sending SIGUSR1 to st_trace"
-kill -USR1 ${ST_TRACE_PID}
-echo "Waiting for st_trace..."
-wait ${ST_TRACE_PID}
+echo "Sending SIGUSR1 to ohm_trace"
+kill -USR1 ${ST_TRACE0_PID}
+kill -USR1 ${ST_TRACE1_PID}
+kill -USR1 ${ST_TRACE2_PID}
+kill -USR1 ${ST_TRACE3_PID}
+kill -USR1 ${ST_TRACE4_PID}
+kill -USR1 ${ST_TRACE5_PID}
+kill -USR1 ${ST_TRACE6_PID}
+kill -USR1 ${ST_TRACE7_PID}
+echo "Waiting for ohm_trace..."
+wait ${ST_TRACE0_PID}
+wait ${ST_TRACE1_PID}
+wait ${ST_TRACE2_PID}
+wait ${ST_TRACE3_PID}
+wait ${ST_TRACE4_PID}
+wait ${ST_TRACE5_PID}
+wait ${ST_TRACE6_PID}
+wait ${ST_TRACE7_PID}
 sleep 1
 
 #mkdir -p run-data-fig2/"$PROG"/
@@ -131,5 +168,7 @@ echo "Done! Collect your logs."
   done
 done
 echo "DONE!"
-ft2csv CXS_START my_trace_of_scheduling_events_on_cpu0
+cat ohm_cpu0 ohm_cpu1 ohm_cpu2 ohm_cpu3 ohm_cpu4 ohm_cpu5 ohm_cpu6 ohm_cpu7 > all_events
 
+ft2csv CXS_START all_events > cxs_out.txt
+ft2csv SCHED_START all_events > sched_out.txt
