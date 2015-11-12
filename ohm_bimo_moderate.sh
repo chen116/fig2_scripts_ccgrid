@@ -123,7 +123,7 @@ echo "Doing release..."
 $RELEASETS
 
 echo "Waiting for rtspin processes..."
-wait ${SPIN_PIDS}
+#wait ${SPIN_PIDS}
 
 for i in "${NEW_SPIN_PIDS[@]}"
 do
