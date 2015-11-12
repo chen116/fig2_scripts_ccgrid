@@ -39,9 +39,9 @@ do
 #   for util in 8.2 8.4 8.6 8.8
 #  for util in 0.2 0.4 0.6 0.8 1.2 1.4 1.6 1.8 2.2 2.4 2.6 2.8 3.2 3.4 3.6 3.8 4.2 4.4 4.6 4.8 5.2 5.4 5.6 5.8 6.2 6.4 6.6 6.8 7.2 7.4 7.6 7.8 8
  # for util in 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 4.2 4.4 4.6 4.8 5 5.2 5.4 5.6 5.8 6 6.2 6.4 6.6 6.8 7 7.2 7.4 7.6 7.8 8 8.2 8.4
-  for util in 7
+  for util in 7 8
   do
-    for rep in 0
+    for rep in 0 1
     #for rep in 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
     do
 
@@ -156,8 +156,24 @@ wait ${ST_TRACE6_PID}
 wait ${ST_TRACE7_PID}
 sleep 1
 
-#mkdir -p run-data-fig2/"$PROG"/
-#mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+mkdir -p run-data-fig2/"$PROG"/
+mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+cat ohm_cpu0 ohm_cpu1 ohm_cpu2 ohm_cpu3 ohm_cpu4 ohm_cpu5 ohm_cpu6 ohm_cpu7 > all_events
+ft2csv CXS_START all_events > cxs_out
+ft2csv SCHED_START all_events > sched_out
+mv cxs_out run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+mv sched_out/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+rm ohm_cpu0
+rm ohm_cpu1
+rm ohm_cpu2
+rm ohm_cpu3
+rm ohm_cpu4
+rm ohm_cpu5
+rm ohm_cpu6
+rm ohm_cpu7
+rm all_events
+
+
 #mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
 #mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
 #mv log.txt run-data/"$sched"_$rep/
@@ -168,7 +184,4 @@ echo "Done! Collect your logs."
   done
 done
 echo "DONE!"
-cat ohm_cpu0 ohm_cpu1 ohm_cpu2 ohm_cpu3 ohm_cpu4 ohm_cpu5 ohm_cpu6 ohm_cpu7 > all_events
 
-ft2csv CXS_START all_events > cxs_out.txt
-ft2csv SCHED_START all_events > sched_out.txt
