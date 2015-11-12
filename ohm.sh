@@ -162,7 +162,7 @@ cat ohm_cpu0 ohm_cpu1 ohm_cpu2 ohm_cpu3 ohm_cpu4 ohm_cpu5 ohm_cpu6 ohm_cpu7 > al
 ft2csv CXS_START all_events > cxs_out
 ft2csv SCHED_START all_events > sched_out
 mv cxs_out run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
-mv sched_out/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+mv sched_out run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
 rm ohm_cpu0
 rm ohm_cpu1
 rm ohm_cpu2
