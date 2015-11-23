@@ -4,7 +4,7 @@ WORK_DIR="/root/experiment-scripts/run-data-fig2/"
 PROG=$1
 
 #declare -a Dist=("bimo-medium")
-declare -a Dist=("uni-heavy" "uni-medium" "uni-light")
+declare -a Dist=("uni-heavy" "uni-medium" "uni-light" "bimo-medium")
 #declare -a Dist=("uni-light")
 declare -a PDist=("uni-moderate")
 #declare -a Dist=("uni-light" "uni-medium" "uni-heavy")
@@ -26,9 +26,8 @@ declare -a PDist=("uni-moderate")
 #declare -a Util=("1" "2" "3" "4" "5" "6" "7" "8")
 declare -a Util=("1" "2" "3" "4")
 #declare -a Util=("8.5" )
-#declare -a Util=("5" "6" "7"  )
-declare -a Rep=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24")
-#declare -a Rep=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
+#declare -a Rep=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24")
+declare -a Rep=("0" "1" "2")
 cd "$WORK_DIR""/""$PROG"; date
 for pdist in "${PDist[@]}"
 do
