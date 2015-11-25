@@ -26,8 +26,8 @@ declare -a PDist=("uni-moderate")
 #declare -a Util=("1" "2" "3" "4" "5" "6" "7" "8")
 declare -a Util=("1" "2" "3" "4")
 #declare -a Util=("8.5" )
-#declare -a Rep=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24")
-declare -a Rep=("0" "1" "2")
+declare -a Rep=("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10" "11" "12" "13" "14" "15" "16" "17" "18" "19" "20" "21" "22" "23" "24")
+#declare -a Rep=("0" "1" "2")
 cd "$WORK_DIR""/""$PROG"; date
 for pdist in "${PDist[@]}"
 do
