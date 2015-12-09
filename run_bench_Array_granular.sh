@@ -28,7 +28,9 @@ SchedNames="GSN-EDF"
 
 for sched in $SchedNames
 do
-  for util in 1 2 3 4 4.2
+  for util in 0.2 0.4 0.6 0.8 1 1.2 1.4 1.6 1.8 2 2.2 2.4 2.6 2.8 3 3.2 3.4 3.6 3.8 4 4.2
+
+  #for util in 1 2 3 4 4.2
   #for util in 8.5
   #for util in 3.0 4.0 5.0 6.0 7.0 8.0 8.2
 #  for util in 2.2 2.6 3.2 3.6 4.2 4.6 5.2 5.6 6.2 6.6 7 7.2
