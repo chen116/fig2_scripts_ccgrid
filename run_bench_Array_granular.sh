@@ -120,9 +120,9 @@ echo "Waiting for st_trace..."
 wait ${ST_TRACE_PID}
 sleep 1
 
-mkdir -p run-data-fig2/"$PROG"/
-mkdir run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
-mv /dev/shm/*.bin run-data-fig2/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+mkdir -p run-data/"$PROG"/
+mkdir run-data/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
+mv /dev/shm/*.bin run-data/"$PROG"/"$Dist""_""$PDist""_""$util""_""$rep"/
 #mv log.txt run-data/"$sched"_$rep/
 sleep 1
 echo "Done! Collect your logs."
